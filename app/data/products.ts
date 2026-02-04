@@ -69,7 +69,7 @@ export const products: Product[] = [
     brand: "H&M",
     image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
     description: "Comfortable cotton t-shirt in classic design. Available in multiple colors and sizes.",
-    rating: 4.2,
+    rating: 3.2,
   },
   {
     id: "8",

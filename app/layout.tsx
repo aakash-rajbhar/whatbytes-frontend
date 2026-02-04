@@ -2,9 +2,9 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { CartProvider } from "./cart/CartContext";
-import {Inter} from 'next/font/google'
+import {Montserrat} from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'], display: 'swap' });
+const montserrat = Montserrat({ subsets: ['latin'], display: 'swap' });
 
 export const metadata = {
   title: "E-Commerce Store",
@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-gray-50 flex flex-col min-h-screen`}>
+      <body className={`${montserrat.className} bg-gray-50 flex flex-col min-h-screen`}>
         <CartProvider>
           <Header />
           <div className="flex-1">

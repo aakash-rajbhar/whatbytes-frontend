@@ -29,15 +29,15 @@ export default function Header() {
         </Link>
 
         {/* Desktop Search - Hidden on mobile/tablet */}
-        <form onSubmit={handleSearch} className="hidden lg:flex flex-1 max-w-xl relative border border-white rounded-md">
+        <form onSubmit={handleSearch} className="hidden lg:flex flex-1 max-w-xl relative border border-neutral-400 rounded-md">
           <div className="relative w-full">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-100 w-5 h-5" />
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               type="text"
               placeholder="Search for products..."
-              className="w-full pl-10 pr-4 py-2 text-base rounded text-white placeholder:text-white outline-none"
+              className="w-full pl-10 pr-4 py-2 text-base rounded text-neutral-100 placeholder:text-neutral-200 outline-none"
             />
           </div>
         </form>

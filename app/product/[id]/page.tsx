@@ -2,9 +2,10 @@
 
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
-import { Star, Minus, Plus } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import { products } from "../../data/products";
 import { useCart } from "../../cart/CartContext";
+import { renderRating } from "../../utils/renderRating";
 import { useState } from "react";
 
 export default function ProductDetail() {
@@ -28,35 +29,6 @@ export default function ProductDetail() {
       </div>
     );
   }
-
-  const renderRating = (rating?: number) => {
-    if (!rating) return null;
-    
-    const stars = [];
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
-    
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(
-        <Star key={i} className="w-5 h-5 fill-[#1e4474] text-[#355d86]" />
-      );
-    }
-    
-    if (hasHalfStar) {
-      stars.push(
-        <Star key="half" className="w-5 h-5 fill-blue-300 text-blue-400" />
-      );
-    }
-    
-    const emptyStars = 5 - Math.ceil(rating);
-    for (let i = 0; i < emptyStars; i++) {
-      stars.push(
-        <Star key={`empty-${i}`} className="w-5 h-5 text-gray-300" />
-      );
-    }
-    
-    return <div className="flex gap-1 items-center">{stars}</div>;
-  };
 
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
@@ -94,7 +66,7 @@ export default function ProductDetail() {
 
             {product.rating && (
               <div className="mb-4">
-                {renderRating(product.rating)}
+                {renderRating({ rating: product.rating, size: "md" })}
               </div>
             )}
 

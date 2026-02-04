@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Star } from "lucide-react";
 import { Product } from "../types/index";
 import { useCart } from "../cart/CartContext";
+import { renderRating } from "../utils/renderRating";
 
 interface Props {
   product: Product;
@@ -18,38 +18,9 @@ export default function ProductCard({ product }: Props) {
     addToCart(product);
   };
 
-  const renderRating = (rating?: number) => {
-    if (!rating) return null;
-    
-    const stars = [];
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
-    
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(
-        <Star key={i} className="w-4 h-4 fill-[#1e4474] text-[#355d86]" />
-      );
-    }
-    
-    if (hasHalfStar) {
-      stars.push(
-        <Star key="half" className="w-4 h-4 fill-blue-300 text-blue-500" />
-      );
-    }
-    
-    const emptyStars = 5 - Math.ceil(rating);
-    for (let i = 0; i < emptyStars; i++) {
-      stars.push(
-        <Star key={`empty-${i}`} className="w-4 h-4 text-gray-300" />
-      );
-    }
-    
-    return <div className="flex gap-0.5">{stars}</div>;
-  };
-
   return (
     <Link href={`/product/${product.id}`}>
-      <div className="bg-white rounded-2xl shadow hover:shadow-lg overflow-hidden transition-shadow flex flex-col h-full">
+      <div className="bg-white rounded-2xl max-w-xl shadow hover:shadow-lg overflow-hidden transition-shadow flex flex-col h-full">
         <div className="relative w-full h-48 mb-3">
           <Image
             src={product.image}
@@ -70,7 +41,7 @@ export default function ProductCard({ product }: Props) {
 
         {product.rating && (
           <div className="mb-3">
-            {renderRating(product.rating)}
+            {renderRating({ rating: product.rating, size: "sm" })}
           </div>
         )}
 
