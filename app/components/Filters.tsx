@@ -32,19 +32,28 @@ function FiltersContent() {
     router.push(`/?${params.toString()}`);
   };
 
-  const updatePriceRange = (value: string) => {
-    const newMax = parseInt(value);
+  const updatePriceRange = (min: number, max: number) => {
     const params = new URLSearchParams(searchParams.toString());
     
-    if (newMax === 1000) {
+    if (min === 0 && max === 1000) {
       params.delete("minPrice");
       params.delete("maxPrice");
     } else {
-      params.set("minPrice", "0");
-      params.set("maxPrice", value);
+      params.set("minPrice", min.toString());
+      params.set("maxPrice", max.toString());
     }
     
     router.push(`/?${params.toString()}`);
+  };
+
+  const handleMinChange = (value: number) => {
+    const newMin = Math.min(value, priceRange[1] - 10);
+    setPriceRange([newMin, priceRange[1]]);
+  };
+
+  const handleMaxChange = (value: number) => {
+    const newMax = Math.max(value, priceRange[0] + 10);
+    setPriceRange([priceRange[0], newMax]);
   };
 
   return (
@@ -75,21 +84,47 @@ function FiltersContent() {
       <div>
         <h3 className="font-semibold mb-3">Price</h3>
         <div className="space-y-3">
-          <input
-            type="range"
-            min="0"
-            max="1000"
-            value={priceRange[1]}
-            onChange={(e) => {
-              setPriceRange([0, parseInt(e.target.value)]);
-            }}
-            onMouseUp={(e) => updatePriceRange((e.target as HTMLInputElement).value)}
-            onTouchEnd={(e) => updatePriceRange((e.target as HTMLInputElement).value)}
-            className="w-full cursor-pointer"
-          />
+          <div className="relative h-5 flex items-center">
+            {/* Track */}
+            <div className="absolute w-full h-1 bg-white/25 rounded-lg"></div>
+            {/* Active track */}
+            <div 
+              className="absolute h-1 bg-white/50 rounded-lg"
+              style={{
+                left: `${(priceRange[0] / 1000) * 100}%`,
+                right: `${100 - (priceRange[1] / 1000) * 100}%`
+              }}
+            ></div>
+            
+            {/* Min thumb */}
+            <input
+              type="range"
+              min="0"
+              max="1000"
+              step="10"
+              value={priceRange[0]}
+              onChange={(e) => handleMinChange(parseInt(e.target.value))}
+              onMouseUp={() => updatePriceRange(priceRange[0], priceRange[1])}
+              onTouchEnd={() => updatePriceRange(priceRange[0], priceRange[1])}
+              className="absolute w-full appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#0758a8] [&::-webkit-slider-thumb]:shadow-md [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-[#0758a8] "
+            />
+            
+            {/* Max thumb */}
+            <input
+              type="range"
+              min="0"
+              max="1000"
+              step="10"
+              value={priceRange[1]}
+              onChange={(e) => handleMaxChange(parseInt(e.target.value))}
+              onMouseUp={() => updatePriceRange(priceRange[0], priceRange[1])}
+              onTouchEnd={() => updatePriceRange(priceRange[0], priceRange[1])}
+              className="absolute w-full appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#0758a8] [&::-webkit-slider-thumb]:shadow-md [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-[#0758a8] "
+            />
+          </div>
           <div className="flex justify-between text-sm">
-            <span>{priceRange[0]}</span>
-            <span>{priceRange[1]}</span>
+            <span>${priceRange[0]}</span>
+            <span>${priceRange[1]}</span>
           </div>
         </div>
       </div>
