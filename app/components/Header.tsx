@@ -29,7 +29,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop Search - Hidden on mobile/tablet */}
-        <form onSubmit={handleSearch} className="hidden lg:flex flex-1 max-w-xl relative border border-neutral-400 rounded-md">
+        <form onSubmit={handleSearch} className="hidden lg:flex flex-1 max-w-xl relative border border-neutral-100 rounded-md">
           <div className="relative w-full">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-100 w-5 h-5" />
             <input
