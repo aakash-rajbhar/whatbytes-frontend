@@ -72,7 +72,7 @@ Open [whatbytes-frontend](http://localhost:3000) to view the application in your
 - **Language**: TypeScript
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **Icons**: [Lucide React](https://lucide.dev/)
-- **Font**: [Inter](https://fonts.google.com/specimen/Inter) (Google Fonts)
+- **Font**: [Montserrat](https://fonts.google.com/specimen/Montserrat) (Google Fonts)
 - **Image Optimization**: Next.js Image component with Unsplash CDN
 
 ## 📁 Project Structure
