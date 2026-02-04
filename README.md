@@ -4,7 +4,7 @@ A fully responsive e-commerce web application built with **Next.js 15**, **TypeS
 
 ## 🚀 Live Demo
 
-Open [whatbytes-frontend](http://localhost:3000) to view the application in your browser.
+Open [whatbytes-ecommerce-frontend](https://whatbytes-ecommerce-frontend.vercel.app/) to view the application in your browser.
 
 ## ✨ Features
 
